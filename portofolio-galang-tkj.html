@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portofolio TKJ | GALANG SAFA RAMADHAN</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #070913;
+            --card-bg: rgba(16, 21, 42, 0.78);
+            --neon-cyan: #00f3ff;
+            --neon-purple: #bc13fe;
+            --neon-green: #0aff68;
+            --text-main: #e2e8f0;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; scroll-behavior: smooth; }
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        #bg-canvas {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: -1;
+        }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+
+        /* Navbar */
+        nav {
+            position: sticky; top: 0; z-index: 100;
+            background: rgba(7, 9, 19, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0, 243, 255, 0.25);
+            padding: 15px 0;
+        }
+        .nav-wrap { display: flex; justify-content: space-between; align-items: center; }
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 800; font-size: 1.2rem;
+            color: var(--neon-cyan);
+            text-shadow: 0 0 10px var(--neon-cyan);
+        }
+        .nav-links a {
+            color: #cbd5e1; text-decoration: none; margin-left: 20px; font-weight: 600;
+            transition: 0.3s;
+        }
+        .nav-links a:hover { color: var(--neon-cyan); text-shadow: 0 0 8px var(--neon-cyan); }
+
+        /* Hero Section */
+        .hero {
+            min-height: 88vh;
+            display: flex; align-items: center; justify-content: space-between;
+            gap: 40px; padding: 60px 0; flex-wrap: wrap-reverse;
+        }
+        .hero-text { flex: 1 1 520px; }
+        .badge {
+            display: inline-block;
+            padding: 6px 16px; border-radius: 50px;
+            border: 1px solid var(--neon-green);
+            color: var(--neon-green);
+            background: rgba(10, 255, 104, 0.08);
+            box-shadow: 0 0 12px rgba(10, 255, 104, 0.35);
+            font-size: 0.85rem; font-weight: 700; margin-bottom: 16px;
+        }
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2rem, 4.5vw, 3.2rem);
+            line-height: 1.2; margin-bottom: 12px;
+            background: linear-gradient(90deg, #ffffff, var(--neon-cyan), var(--neon-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 12px rgba(0, 243, 255, 0.4));
+        }
+        .typing {
+            font-size: 1.15rem; font-weight: 600;
+            color: var(--neon-cyan);
+            min-height: 30px; margin-bottom: 16px;
+        }
+        .hero-desc { color: #94a3b8; margin-bottom: 28px; max-width: 560px; }
+
+        /* Foto Profil Neon */
+        .hero-photo { flex: 0 1 320px; text-align: center; margin: 0 auto; }
+        .photo-frame {
+            position: relative;
+            width: 280px; height: 280px;
+            margin: 0 auto 18px; border-radius: 50%;
+            padding: 6px;
+            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple), var(--neon-green));
+            box-shadow: 0 0 30px rgba(0, 243, 255, 0.6), 0 0 60px rgba(188, 19, 254, 0.4);
+            animation: floatAnim 4s ease-in-out infinite;
+        }
+        .photo-frame img {
+            width: 100%; height: 100%;
+            object-fit: cover; border-radius: 50%;
+            border: 4px solid var(--bg-dark);
+        }
+        @keyframes floatAnim {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-14px); }
+        }
+        .upload-btn {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 8px;
+            border: 1px solid var(--neon-cyan);
+            background: rgba(0, 243, 255, 0.1);
+            color: var(--neon-cyan);
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .upload-btn:hover {
+            background: var(--neon-cyan);
+            color: #050814;
+            box-shadow: 0 0 15px var(--neon-cyan);
+        }
+
+        /* Tombol Neon */
+        .btn-group { display: flex; flex-wrap: wrap; gap: 14px; }
+        .btn-neon {
+            padding: 12px 24px; border-radius: 10px;
+            font-weight: 700; text-decoration: none;
+            transition: 0.3s; display: inline-flex; align-items: center; gap: 8px;
+            cursor: pointer; border: none; font-size: 0.95rem;
+        }
+        .btn-primary {
+            background: var(--neon-cyan); color: #050814;
+            box-shadow: 0 0 18px rgba(0, 243, 255, 0.6);
+        }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 0 28px var(--neon-cyan); }
+        .btn-outline {
+            background: transparent; color: #fff;
+            border: 1.5px solid var(--neon-purple);
+            box-shadow: 0 0 14px rgba(188, 19, 254, 0.4);
+        }
+        .btn-outline:hover { background: var(--neon-purple); transform: translateY(-3px); }
+
+        /* Section & Cards */
+        section { padding: 70px 0; }
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem; text-align: center; margin-bottom: 40px;
+            color: #fff; text-shadow: 0 0 14px var(--neon-cyan);
+        }
+        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid rgba(0, 243, 255, 0.25);
+            border-radius: 16px; padding: 24px;
+            backdrop-filter: blur(10px);
+            transition: 0.35s;
+        }
+        .card:hover {
+            transform: translateY(-6px);
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 24px rgba(0, 243, 255, 0.3);
+        }
+
+        /* Skill Bar */
+        .skill-head { display: flex; justify-content: space-between; font-weight: 700; margin-bottom: 8px; }
+        .bar-bg { width: 100%; height: 10px; background: rgba(255,255,255,0.1); border-radius: 10px; overflow: hidden; margin-bottom: 10px; }
+        .bar-fill { height: 100%; border-radius: 10px; transition: width 1.5s ease; }
+
+        /* Sosmed Grid */
+        .sosmed-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 16px; margin-top: 24px; }
+        .sosmed-card {
+            display: flex; align-items: center; gap: 12px;
+            padding: 16px 20px; border-radius: 14px;
+            background: var(--card-bg); text-decoration: none; color: #fff;
+            border: 1px solid rgba(255,255,255,0.12);
+            font-weight: 700; transition: 0.3s;
+        }
+        .sosmed-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent);
+            box-shadow: 0 0 20px var(--accent);
+        }
+
+        /* Form Kontak */
+        input, textarea {
+            width: 100%; padding: 12px 16px; margin-bottom: 14px;
+            border-radius: 10px; border: 1px solid rgba(0, 243, 255, 0.3);
+            background: rgba(7, 9, 19, 0.8); color: #fff; font-family: inherit;
+        }
+        input:focus, textarea:focus { outline: none; border-color: var(--neon-cyan); box-shadow: 0 0 12px rgba(0,243,255,0.4); }
+
+        footer {
+            text-align: center; padding: 28px;
+            border-top: 1px solid rgba(0, 243, 255, 0.2);
+            color: #94a3b8; font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+<canvas id="bg-canvas"></canvas>
+
+<nav>
+    <div class="container nav-wrap">
+        <div class="logo">&lt;GALANG.TKJ /&gt;</div>
+        <div class="nav-links">
+            <a href="#profil">Profil</a>
+            <a href="#keahlian">Keahlian</a>
+            <a href="#proyek">Proyek</a>
+            <a href="#kontak">Kontak</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <!-- HERO -->
+    <section id="profil" class="hero">
+        <div class="hero-text">
+            <span class="badge">⚡ Teknik Komputer dan Jaringan (TKJ)</span>
+            <h1>GALANG SAFA RAMADHAN</h1>
+            <div class="typing" id="typing-text"></div>
+            <p class="hero-desc">Siswa Teknik Komputer dan Jaringan yang berfokus pada perancangan infrastruktur jaringan, konfigurasi MikroTik &amp; Cisco, administrasi server Linux, serta instalasi fiber optik.</p>
+
+            <div class="btn-group">
+                <a href="https://wa.me/6285881972290" target="_blank" class="btn-neon btn-primary">
+                    💬 WhatsApp: 085881972290
+                </a>
+                <a href="mailto:ramadhangalangsafa@gmail.com" class="btn-neon btn-outline">
+                    ✉️ ramadhangalangsafa@gmail.com
+                </a>
+            </div>
+        </div>
+
+        <div class="hero-photo">
+            <div class="photo-frame">
+                <img id="profile-img" src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=600&q=80" alt="Foto GALANG SAFA RAMADHAN">
+            </div>
+            <label for="photo-upload" class="upload-btn">📷 Ganti Foto Profil</label>
+            <input type="file" id="photo-upload" accept="image/*" style="display: none;">
+        </div>
+    </section>
+
+    <!-- KEAHLIAN TKJ -->
+    <section id="keahlian">
+        <h2 class="section-title">KOMPETENSI &amp; KEAHLIAN TKJ</h2>
+        <div class="grid-2">
+            <div class="card">
+                <div class="skill-head">
+                    <span>MikroTik &amp; Routing</span>
+                    <span style="color: #00f3ff;">92%</span>
+                </div>
+                <div class="bar-bg">
+                    <div class="bar-fill" style="width: 92%; background: #00f3ff; box-shadow: 0 0 12px #00f3ff;"></div>
+                </div>
+                <small style="color: #94a3b8;">Hotspot, VLAN, Bandwidth Management, Firewall, VPN</small>
+            </div>
+
+            <div class="card">
+                <div class="skill-head">
+                    <span>Linux Server Admin</span>
+                    <span style="color: #bc13fe;">88%</span>
+                </div>
+                <div class="bar-bg">
+                    <div class="bar-fill" style="width: 88%; background: #bc13fe; box-shadow: 0 0 12px #bc13fe;"></div>
+                </div>
+                <small style="color: #94a3b8;">Debian/Ubuntu Server, DNS, DHCP, Web Server (Apache/Nginx)</small>
+            </div>
+
+            <div class="card">
+                <div class="skill-head">
+                    <span>Fiber Optik &amp; Cabling</span>
+                    <span style="color: #0aff68;">90%</span>
+                </div>
+                <div class="bar-bg">
+                    <div class="bar-fill" style="width: 90%; background: #0aff68; box-shadow: 0 0 12px #0aff68;"></div>
+                </div>
+                <small style="color: #94a3b8;">Splicing FO, Crimping RJ45, Topologi LAN/WAN</small>
+            </div>
+
+            <div class="card">
+                <div class="skill-head">
+                    <span>Hardware &amp; Troubleshooting</span>
+                    <span style="color: #ff007f;">95%</span>
+                </div>
+                <div class="bar-bg">
+                    <div class="bar-fill" style="width: 95%; background: #ff007f; box-shadow: 0 0 12px #ff007f;"></div>
+                </div>
+                <small style="color: #94a3b8;">Perakitan PC, Instalasi OS, Diagnosa Jaringan</small>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROYEK -->
+    <section id="proyek">
+        <h2 class="section-title">PROYEK PRAKTIKUM TKJ</h2>
+        <div class="grid-3">
+            <div class="card">
+                <span style="color: var(--neon-green); font-size: 0.8rem; font-weight: 700;">
+                    ● MikroTik • Wireless
+                </span>
+                <h3 style="margin: 10px 0; color: #fff;">Rancang Bangun RT/RW Net &amp; Hotspot Voucher</h3>
+                <p style="color: #94a3b8; font-size: 0.92rem;">Konfigurasi manajemen user hotspot berbasis MikroTik RouterOS dengan pembagian bandwidth merata (Queue Tree) dan halaman login kustom.</p>
+            </div>
+
+            <div class="card">
+                <span style="color: var(--neon-green); font-size: 0.8rem; font-weight: 700;">
+                    ● Linux • SysAdmin
+                </span>
+                <h3 style="margin: 10px 0; color: #fff;">Instalasi Server Debian &amp; Web Hosting Lokal</h3>
+                <p style="color: #94a3b8; font-size: 0.92rem;">Membangun server lokal lengkap dengan layanan DNS Bind9, DHCP Server, Samba File Sharing, dan database MariaDB.</p>
+            </div>
+
+            <div class="card">
+                <span style="color: var(--neon-green); font-size: 0.8rem; font-weight: 700;">
+                    ● Cisco Packet Tracer
+                </span>
+                <h3 style="margin: 10px 0; color: #fff;">Simulasi Jaringan Multi-Gedung (VLAN &amp; OSPF)</h3>
+                <p style="color: #94a3b8; font-size: 0.92rem;">Perancangan topologi jaringan antar departemen menggunakan segmentasi VLAN, Trunking, dan dynamic routing OSPF.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- KONTAK & MEDIA SOSIAL -->
+    <section id="kontak">
+        <h2 class="section-title">HUBUNGI &amp; MEDIA SOSIAL</h2>
+
+        <div class="grid-2">
+            <div class="card">
+                <h3 style="margin-bottom: 14px; color: var(--neon-cyan);">Informasi Kontak Langsung</h3>
+                <p style="margin-bottom: 10px;">📱 <strong>No. HP / WA:</strong> 085881972290</p>
+                <p style="margin-bottom: 18px;">📧 <strong>Email:</strong> ramadhangalangsafa@gmail.com</p>
+
+                <div class="sosmed-grid">
+                    <a href="https://www.tiktok.com/@tukangseblak7788?_r=1&_t=ZS-98D9vyz1ONR" target="_blank" class="sosmed-card" style="--accent: #ff0050;">
+                        <span style="font-size: 1.4rem;">🎵</span>
+                        <span>TikTok</span>
+                    </a>
+                    <a href="https://www.instagram.com/user0200809_?igsh=OHFwdXNlcXp1cGc3" target="_blank" class="sosmed-card" style="--accent: #e1306c;">
+                        <span style="font-size: 1.4rem;">📸</span>
+                        <span>Instagram</span>
+                    </a>
+                    <a href="https://youtube.com/@galangsafaramadhan5026?si=kTiQG8BbalAlvygn" target="_blank" class="sosmed-card" style="--accent: #ff0000;">
+                        <span style="font-size: 1.4rem;">▶️</span>
+                        <span>YouTube</span>
+                    </a>
+                    <a href="https://www.facebook.com/share/198mcXzM4E/" target="_blank" class="sosmed-card" style="--accent: #1877f2;">
+                        <span style="font-size: 1.4rem;">📘</span>
+                        <span>Facebook</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3 style="margin-bottom: 14px; color: var(--neon-purple);">Kirim Pesan Cepat ke WhatsApp</h3>
+                <form id="wa-form">
+                    <input type="text" id="nama-pengirim" placeholder="Nama Anda" required>
+                    <textarea id="isi-pesan" rows="4" placeholder="Tulis pesan untuk Galang..." required></textarea>
+                    <button type="submit" class="btn-neon btn-primary" style="width: 100%; justify-content: center;">
+                        🚀 Kirim via WhatsApp
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+</div>
+
+<footer>
+    &copy; 2026 <strong>GALANG SAFA RAMADHAN</strong> — Portofolio Teknik Komputer &amp; Jaringan
+</footer>
+
+<script>
+    // Ganti Foto Profil Lokal
+    document.getElementById('photo-upload').addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(evt) {
+                document.getElementById('profile-img').src = evt.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    // Kirim Form Langsung ke WhatsApp
+    document.getElementById('wa-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const pengirim = document.getElementById('nama-pengirim').value.trim();
+        const pesan = document.getElementById('isi-pesan').value.trim();
+        if (pengirim && pesan) {
+            const teksWa = encodeURIComponent(`Halo Galang, saya ${pengirim}.
+
+${pesan}`);
+            window.open(`https://wa.me/6285881972290?text=${teksWa}`, '_blank');
+        }
+    });
+
+    // Efek Mengetik Otomatis
+    const teksList = [
+        "Network Administrator & MikroTik Specialist",
+        "Linux Server & Fiber Optic Technician",
+        "Siswa Teknik Komputer dan Jaringan (TKJ)"
+    ];
+    let idx = 0, charIdx = 0, menghapus = false;
+    const target = document.getElementById("typing-text");
+
+    function ketik() {
+        const teks = teksList[idx];
+        target.textContent = menghapus ? teks.substring(0, charIdx--) : teks.substring(0, charIdx++);
+        if (!menghapus && charIdx === teks.length + 1) {
+            menghapus = true; setTimeout(ketik, 1500); return;
+        }
+        if (menghapus && charIdx === 0) {
+            menghapus = false; idx = (idx + 1) % teksList.length;
+        }
+        setTimeout(ketik, menghapus ? 45 : 85);
+    }
+    ketik();
+
+    // Animasi Partikel Jaringan Neon
+    const canvas = document.getElementById('bg-canvas');
+    const ctx = canvas.getContext('2d');
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    let particles = Array.from({ length: 55 }, () => ({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 0.9,
+        vy: (Math.random() - 0.5) * 0.9
+    }));
+
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach((p, i) => {
+            p.x += p.vx; p.y += p.vy;
+            if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+            if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
+            ctx.fillStyle = '#00f3ff';
+            ctx.fill();
+
+            for (let j = i + 1; j < particles.length; j++) {
+                const dx = p.x - particles[j].x;
+                const dy = p.y - particles[j].y;
+                const dist = Math.hypot(dx, dy);
+                if (dist < 130) {
+                    ctx.beginPath();
+                    ctx.strokeStyle = `rgba(0, 243, 255, ${1 - dist / 130})`;
+                    ctx.lineWidth = 0.7;
+                    ctx.moveTo(p.x, p.y);
+                    ctx.lineTo(particles[j].x, particles[j].y);
+                    ctx.stroke();
+                }
+            }
+        });
+        requestAnimationFrame(animate);
+    }
+    animate();
+</script>
+</body>
+</html>
